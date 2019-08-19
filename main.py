@@ -1,10 +1,14 @@
 import json
-from train import *
-from test import *
+from train import train
+from test import test
 import random
+import os
+import tensorflow as tf
+import numpy as np
+from model import a
+
 
 def main():
-
     if tf.gfile.Exists(a.output_dir):
         tf.gfile.DeleteRecursively(a.output_dir)
         tf.gfile.MakeDirs(a.output_dir)
@@ -29,5 +33,6 @@ def main():
         train()
     elif a.mode == 'test':
         test()
+
 
 main()
