@@ -21,7 +21,7 @@ def train():
     batch_targets_holder = tf.placeholder(tf.float32, [a.target_batch_size, 80, 80, 1], name='targets')
 
     # compute the number of black pixels
-    black = tf.greater(0.5, batch_targets_holder)
+    black = tf.greater(batch_targets_holder, 0.5)
     as_ints = tf.cast(black, tf.int32)
     zero_n = tf.reduce_sum(as_ints, [1, 2, 3]) + 1
 

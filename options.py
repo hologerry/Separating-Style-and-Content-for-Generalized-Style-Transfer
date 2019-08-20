@@ -87,13 +87,13 @@ parser.add_argument(
 parser.add_argument(
     "--style_sample_n",
     type=float,
-    default=5,
+    default=7,
     help="the number of samples for each style",
 )
 parser.add_argument(
     "--content_sample_n",
     type=float,
-    default=5,
+    default=7,
     help="the number of samples for each content",
 )
 parser.add_argument(
