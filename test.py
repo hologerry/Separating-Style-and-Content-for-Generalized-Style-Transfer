@@ -1,14 +1,16 @@
-import pickle
 import time
+
 import tensorflow as tf
-from model import a, save_images, create_generator, process
+
+from model import create_generator, process, save_images
+from options import a
 
 
 def test():
     time1 = time.time()
-    input_path_S = pickle.load(open(a.input_dir+'style.txt', 'r'))
-    input_path_C = pickle.load(open(a.input_dir+'content.txt', 'r'))
-    target_path = pickle.load(open(a.input_dir+'target.txt', 'r'))
+    input_path_S = open(a.input_dir+'style.txt', 'r').readlines()
+    input_path_C = open(a.input_dir+'content.txt', 'r').readlines()
+    target_path = open(a.input_dir+'target.txt', 'r').readlines()
     print(time.time() - time1)
 
     # ###################### network ################

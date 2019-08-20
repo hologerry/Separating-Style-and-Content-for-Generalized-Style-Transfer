@@ -1,11 +1,13 @@
 import json
+import os
+import random
+
+import numpy as np
+import tensorflow as tf
+
+from model import a
 from train import train
 from test import test
-import random
-import os
-import tensorflow as tf
-import numpy as np
-from model import a
 
 
 def main():

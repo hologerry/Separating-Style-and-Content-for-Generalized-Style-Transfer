@@ -1,18 +1,18 @@
 import math
 import os
-import pickle
 import time
 
 import tensorflow as tf
 
-from model import a, create_generator, process, save_images
+from model import create_generator, process, save_images
+from options import a
 
 
 def train():
     time1 = time.time()
-    input_path_S = pickle.load(open(a.input_dir+'style.txt', 'r'))
-    input_path_C = pickle.load(open(a.input_dir+'content.txt', 'r'))
-    target_path = pickle.load(open(a.input_dir+'target.txt', 'r'))
+    input_path_S = [i.strip() for i in open(a.input_dir+'style.txt', 'r').readlines()]
+    input_path_C = [i.strip() for i in open(a.input_dir+'content.txt', 'r').readlines()]
+    target_path = [i.strip() for i in open(a.input_dir+'target.txt', 'r').readlines()]
     print(time.time() - time1)
 
     # ###################### network ################
@@ -119,8 +119,8 @@ def train():
 
             if should(a.display_freq):
                 print("saving display images")
-                save_images(outputs, step, [5, 10], 'output')
-                save_images(batch_targets, step, [5, 10], 'target')
+                save_images(outputs, step, [4, 13], 'output')
+                save_images(batch_targets, step, [4, 13], 'target')
 
             if should(a.progress_freq):
                 # global_step will have the correct step count if we resume from a checkpoint
@@ -128,7 +128,7 @@ def train():
                 train_step = (step - 1) % steps_per_epoch + 1
                 rate = (step + 1) * a.target_batch_size / (time.time() - start)
                 remaining = (max_steps - step) * a.target_batch_size / rate
-                print("progress  epoch %d  step %d  image/sec %0.1f  remaining %dm".format(train_epoch,
+                print("progress  epoch %d  step %d  image/sec %0.1f  remaining %dm" % (train_epoch,
                       train_step, rate, remaining / 60))
                 print("model_loss", loss)
                 print("mse", mse)
